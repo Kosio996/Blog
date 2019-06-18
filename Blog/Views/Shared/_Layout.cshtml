@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/bootstrap.css")
+    @Styles.Render("~/Content/SiteStyles.css")
+    @Styles.Render("~/Content/font-awesome.min.css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body style="background-image: url(../../Content/images/robots.png)">
+    <div class="navbar navbar-default navbar-fixed-top">
+        @using (Html.BeginForm("SimpleSearch", "Article", FormMethod.Get))
+        {
+                    <div class="margin-13 border-input">
+                        <input class="seach-input" type="text" id="searchArticle" name="searchArticle">
+
+                        <button class="search-icon" type="submit" id="submitId"><i class="fa fa-search seach-icon-color" aria-hidden="true"></i></button>
+
+                    </div>
+        }
+        <div class="container">
+            
+
+            @Html.ActionLink("BLOG", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            <div class="navbar-collapse ">
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+        
+    </div>
+    <div class="container body-content layout-style">
+        @RenderBody()
+        <footer class="pull-right tag">
+            <p>&copy; @DateTime.Now.Year - Blog</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @*<script src="~/Content/SnowStorm.js"></script>*@
+    @*<script src="~/Content/SnowFlakes.js"></script>*@
+    @RenderSection("scripts", required: false)
+</body>
+</html>

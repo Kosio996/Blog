@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Blog.Models.Article>
+@{
+    ViewBag.Title = "Details";
+    bool modelCount = Model.Count() != 0;
+}
+
+@if (modelCount)
+{
+    foreach (var article in Model)
+    {
+        <div class="container">
+            <article>
+                <header>
+
+                    <h2>
+                        @article.Title
+                    </h2>
+
+                </header>
+
+                <p>@article.Content</p>
+
+                <small class="author"> --author @article.Author.FullName</small>
+
+                <footer class="pull-right">
+
+                    @if (User.IsInRole("Admin") || article.IsAuthor(User.Identity.Name))
+                    {
+                        @Html.ActionLink("Edit", "Edit", "Article", new { @id = article.Id }, new { @class = "btn btn-success btn-xs" })
+                        @Html.ActionLink("Delete", "Delete", "Article", new { @id = article.Id }, new { @class = "btn btn-danger btn-xs" })
+                    }
+
+                    @Html.ActionLink("Back", "Index", "Article", null, new { @class = "btn btn-default btn-xs tagTwo" })
+                </footer>
+            </article>
+        </div>
+    }
+}
+
+<hr />
